@@ -45,18 +45,20 @@ const UserProgression: React.FC = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 shadow rounded-2xl p-6 mb-10">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">User Progression Dashboard</h2>
+    <div className="bg-white dark:bg-gray-800 shadow rounded-2xl p-4 sm:p-6 mb-10">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-4">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">User Progression Dashboard</h2>
         <button
           onClick={exportToCSV}
-          className="flex items-center px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="flex items-center justify-center px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 w-full sm:w-auto"
         >
           <FaDownload className="mr-2" /> Export
         </button>
       </div>
 
-      <div className="flex items-center gap-2 mb-4">
+      {/* Search and Filter */}
+      <div className="flex flex-col sm:flex-row gap-2 mb-4">
         <div className="relative w-full">
           <input
             type="text"
@@ -65,30 +67,39 @@ const UserProgression: React.FC = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
           />
-          <FaSearch className="absolute top-2.5 left-3 text-gray-500 dark:text-gray-400" />
+          <FaSearch className="absolute top-3 left-3 text-gray-500 dark:text-gray-400" />
         </div>
         <button className="p-2 bg-gray-200 dark:bg-gray-700 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600">
           <FaFilter />
         </button>
       </div>
 
-      <div className="max-h-96 overflow-y-auto">
+      {/* User Cards */}
+      <div className="max-h-[26rem] overflow-y-auto space-y-4">
         {filteredUsers.length === 0 ? (
           <p className="text-gray-500 dark:text-gray-400">No users found.</p>
         ) : (
           filteredUsers.map((user) => (
-            <div key={user.id} className="flex justify-between items-center bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4">
-              <div className="flex items-center space-x-4">
-                <img src={user.avatar} alt={user.name} className="w-12 h-12 rounded-full border-2 border-blue-500" />
+            <div
+              key={user.id}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg"
+            >
+              <div className="flex items-center gap-4">
+                <img
+                  src={user.avatar}
+                  alt={user.name}
+                  className="w-12 h-12 rounded-full border-2 border-blue-500"
+                />
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-white">{user.name}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{user.position} - {user.department}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{user.hours} hours spent</p>
                 </div>
               </div>
-              <div className="flex flex-col items-end">
+
+              <div className="flex flex-col w-full sm:w-auto">
                 <p className="text-sm text-gray-800 dark:text-gray-100">{user.coursesProgress}% completed</p>
-                <div className="w-32 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                <div className="w-full sm:w-32 bg-gray-200 dark:bg-gray-600 rounded-full h-2 mt-1">
                   <div
                     className="bg-blue-500 h-2 rounded-full"
                     style={{ width: `${user.coursesProgress}%` }}
@@ -100,6 +111,7 @@ const UserProgression: React.FC = () => {
         )}
       </div>
 
+      {/* View More */}
       {showMore && (
         <div className="text-center mt-4">
           <button

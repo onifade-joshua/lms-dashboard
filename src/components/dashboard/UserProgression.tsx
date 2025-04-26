@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { FaFilter } from 'react-icons/fa'; 
+import { FaFilter } from 'react-icons/fa';
 
-const UserProgression: React.FC<{ searchQuery: string, setSearchQuery: React.Dispatch<React.SetStateAction<string>> }> = ({ searchQuery, setSearchQuery }) => {
+interface UserProgressionProps {
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const UserProgression: React.FC<UserProgressionProps> = ({ searchQuery, setSearchQuery }) => {
   const initialUsers = [
     { id: 1, name: "Alice Johnson", coursesProgress: 75, hours: 120, position: "Junior Developer", avatar: "https://i.pravatar.cc/150?img=1" },
     { id: 2, name: "Bob Smith", coursesProgress: 60, hours: 90, position: "Intermediate Developer", avatar: "https://i.pravatar.cc/150?img=2" },
@@ -26,43 +31,55 @@ const UserProgression: React.FC<{ searchQuery: string, setSearchQuery: React.Dis
       { id: 10, name: "Jackie Brown", coursesProgress: 70, hours: 105, position: "Intermediate Developer", avatar: "https://i.pravatar.cc/150?img=10" },
     ];
     setUsers([...users, ...moreUsers]);
-    setShowMore(false); // Hide "View More" after loading more users
+    setShowMore(false);
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 shadow rounded-2xl p-6 mb-10">
-      <h2 className="text-xl font-semibold mb-4">User Course Progression</h2>
-      <div className="flex items-center mb-4">
-        <FaFilter className="text-gray-600 dark:text-gray-400 mr-2" />
-        <input
-          type="text"
-          className="w-full p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
-          placeholder="Search by user name..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+    <div className="bg-white dark:bg-gray-800 shadow rounded-2xl p-4 sm:p-6 mb-10">
+      <h2 className="text-lg sm:text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+        User Course Progression
+      </h2>
+
+      {/* Search Field */}
+      <div className="flex flex-col sm:flex-row items-stretch gap-2 mb-4">
+        <div className="relative w-full">
+          <input
+            type="text"
+            className="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+            placeholder="Search by user name..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <FaFilter className="absolute left-3 top-3 text-gray-600 dark:text-gray-400" />
+        </div>
       </div>
-      <div className="max-h-80 overflow-y-auto mt-4">
+
+      {/* Users List */}
+      <div className="max-h-[28rem] overflow-y-auto space-y-4">
         {filteredUsers.length === 0 ? (
           <p className="text-gray-500 dark:text-gray-400">No users found.</p>
         ) : (
           filteredUsers.map((user) => (
-            <div key={user.id} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4">
-              <div className="flex items-center space-x-4">
+            <div
+              key={user.id}
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg"
+            >
+              <div className="flex items-center gap-4">
                 <img
                   src={user.avatar}
                   alt={`${user.name}'s avatar`}
                   className="w-12 h-12 rounded-full border-2 border-blue-500"
                 />
                 <div>
-                  <p className="font-semibold">{user.name}</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">{user.name}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{user.position}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{user.hours} hours spent</p>
                 </div>
               </div>
-              <div className="flex flex-col items-end">
-                <p className="text-sm text-gray-800 dark:text-gray-100">{user.coursesProgress}% completed</p>
-                <div className="w-32 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+
+              <div className="w-full sm:w-1/3">
+                <p className="text-sm text-gray-800 dark:text-gray-100 mb-1">{user.coursesProgress}% completed</p>
+                <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                   <div
                     className="bg-blue-500 h-2 rounded-full"
                     style={{ width: `${user.coursesProgress}%` }}
@@ -73,15 +90,16 @@ const UserProgression: React.FC<{ searchQuery: string, setSearchQuery: React.Dis
           ))
         )}
       </div>
+
+      {/* View More */}
       {showMore && (
         <div className="text-center mt-4">
-          <a
-            href="#"
+          <button
             onClick={handleViewMore}
             className="text-blue-500 hover:underline dark:hover:text-blue-300"
           >
             View More
-          </a>
+          </button>
         </div>
       )}
     </div>

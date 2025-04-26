@@ -5,7 +5,8 @@ import {
   FiTrendingUp,
   FiUser,
   FiCreditCard,
-  // FiPieChart,
+  FiAward,  // Icon for Certificate
+  FiSettings, // Icon for Settings
   FiChevronLeft,
   FiChevronRight,
 } from "react-icons/fi";
@@ -37,8 +38,8 @@ export default function Sidebar({ isMobileOpen, setIsMobileOpen }: { isMobileOpe
   const navItems = [
     { path: "/", icon: <FiHome />, label: "My Courses", exact: true },
     { path: "/user-progress", icon: <FiCreditCard />, label: "Progress" },
-    { path: "/certificate", icon: <FiTrendingUp />, label: "Certificate" },
-    { path: "/profile", icon: <FiUser />, label: "Setting" }
+    { path: "/certificate", icon: <FiAward />, label: "Certificate" },  // Updated to FiAward
+    { path: "/profile", icon: <FiUser />, label: "Settings" },  // Updated to FiSettings
   ];
 
   return (
@@ -65,7 +66,6 @@ export default function Sidebar({ isMobileOpen, setIsMobileOpen }: { isMobileOpe
               <span className="ml-2">LMS</span>
             </h1>
           )}
-          {/* {isCollapsed && <Logo />} */}
 
           {/* Collapse toggle button - visible only on md+ screens */}
           <button
@@ -103,4 +103,4 @@ export default function Sidebar({ isMobileOpen, setIsMobileOpen }: { isMobileOpe
       </div>
     </>
   );
-} 
+}
