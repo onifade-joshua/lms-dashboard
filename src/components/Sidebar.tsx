@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
   FiHome,
-  FiTrendingUp,
+  // FiTrendingUp,
   FiUser,
   FiCreditCard,
-  FiAward,  // Icon for Certificate
-  FiSettings, // Icon for Settings
+  FiAward,  
+  // FiSettings, 
   FiChevronLeft,
   FiChevronRight,
 } from "react-icons/fi";

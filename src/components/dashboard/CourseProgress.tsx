@@ -10,18 +10,21 @@ import {
 } from 'chart.js';
 import { motion, useInView } from 'framer-motion';
 
+// Register Chart.js components
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const CourseProgress: React.FC = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: '-100px' }); 
+  const isInView = useInView(ref, { margin: '-100px' });
   const [chartKey, setChartKey] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
+    if (isInView && !hasAnimated) {
       setChartKey(prev => prev + 1);
+      setHasAnimated(true); // Only animate once
     }
-  }, [isInView]);
+  }, [isInView, hasAnimated]);
 
   const chartData = {
     labels: ['Web Dev', 'Cloud Dev', 'AI/ML', 'Data Science'],
@@ -50,7 +53,7 @@ const CourseProgress: React.FC = () => {
     },
     animation: {
       duration: 1000,
-      easing: 'easeOutQuart',
+      easing: 'easeOutQuart' as const, // fixed typing issue
     },
   };
 
@@ -63,9 +66,9 @@ const CourseProgress: React.FC = () => {
       transition={{ duration: 0.6 }}
     >
       <h2 className="text-xl font-semibold mb-4">Course Progress Overview</h2>
-      
-      {/* force re-render when key changes */}
-      {isInView && (
+
+      {/* Render the chart only when it comes into view */}
+      {hasAnimated && (
         <Bar key={chartKey} data={chartData} options={chartOptions} />
       )}
     </motion.div>

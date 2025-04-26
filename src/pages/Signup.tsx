@@ -4,7 +4,7 @@ import { FiMail, FiLock, FiUser } from "react-icons/fi";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../components/Logo";
 import Input from "../components/ui/Input";
-import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa";
+// import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -125,30 +125,6 @@ export default function Signup() {
               </button>
             </form>
           </div>
-          <div className="mt-6">
-  <p className="text-center text-sm text-gray-600 dark:text-gray-400 mb-4">Or sign in with</p>
-  <div className="flex justify-center space-x-4">
-    <button
-      onClick={() => loginWithGoogle().then(() => navigate("/")).catch(() => setError("Google login failed"))}
-      className="p-3 rounded-full bg-red-500 hover:bg-red-600 text-white"
-    >
-      <FaGoogle />
-    </button>
-    <button
-      onClick={() => loginWithFacebook().then(() => navigate("/")).catch(() => setError("Facebook login failed"))}
-      className="p-3 rounded-full bg-blue-700 hover:bg-blue-800 text-white"
-    >
-      <FaFacebook />
-    </button>
-    <button
-      onClick={() => loginWithGithub().then(() => navigate("/")).catch(() => setError("GitHub login failed"))}
-      className="p-3 rounded-full bg-gray-800 hover:bg-gray-900 text-white"
-    >
-      <FaGithub />
-    </button>
-  </div>
-</div>
-
           <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
             By signing in, you agree to our{" "}
             <a

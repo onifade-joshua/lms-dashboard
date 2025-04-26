@@ -9,12 +9,14 @@ const CourseStatus: React.FC = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: '-100px' });
   const [chartKey, setChartKey] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
+    if (isInView && !hasAnimated) {
       setChartKey(prev => prev + 1);
+      setHasAnimated(true);
     }
-  }, [isInView]);
+  }, [isInView, hasAnimated]);
 
   const pieChartData = {
     labels: ["Completed", "In Progress", "Not Started"],
@@ -38,7 +40,7 @@ const CourseStatus: React.FC = () => {
       animateRotate: true,
       animateScale: true,
       duration: 1000,
-      easing: 'easeOutQuart',
+      easing: 'easeOutQuart' as const, // 👉 fix here with 'as const'
     },
   };
 
@@ -52,8 +54,8 @@ const CourseStatus: React.FC = () => {
     >
       <h2 className="text-xl font-semibold mb-4">Course Status</h2>
 
-      {/* Force re-mount on scroll into view */}
-      {isInView && (
+      {/* Render chart only after it scrolls into view */}
+      {hasAnimated && (
         <Pie key={chartKey} data={pieChartData} options={pieChartOptions} />
       )}
     </motion.div>

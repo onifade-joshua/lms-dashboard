@@ -4,7 +4,7 @@ import { FiMail, FiLock } from "react-icons/fi";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../components/Logo";
 import Input from "../components/ui/Input";
-import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa";
+// import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -231,7 +231,7 @@ export default function Login() {
               </div>
             </form>
           </div>
-          <div className="mt-6">
+          {/* <div className="mt-6">
   <p className="text-center text-sm text-gray-600 dark:text-gray-400 mb-4">Or sign in with</p>
   <div className="flex justify-center space-x-4">
     <button
@@ -253,7 +253,7 @@ export default function Login() {
       <FaGithub />
     </button>
   </div>
-</div>
+</div> */}
 
           <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
             By signing in, you agree to our{" "}

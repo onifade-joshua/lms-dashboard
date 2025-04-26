@@ -10,10 +10,10 @@ import { speakText } from "../../utils/tts";
 import axios from "axios";
 import "./AiAssistant.css"
 declare global {
-  interface Window {
-    SpeechRecognition: typeof SpeechRecognition | undefined;
-    webkitSpeechRecognition: typeof SpeechRecognition | undefined;
-  }
+  // interface Window {
+  //   SpeechRecognition: typeof SpeechRecognition | undefined;
+  //   webkitSpeechRecognition: typeof SpeechRecognition | undefined;
+  // }
 
   interface SpeechRecognitionEvent extends Event {
     results: SpeechRecognitionResultList;
@@ -26,38 +26,38 @@ const AiAssistant: React.FC = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [translatedText, setTranslatedText] = useState("");
-  const [translateTo, setTranslateTo] = useState("fr");
+  // const [translateTo, setTranslateTo] = useState("fr");
   const [loading, setLoading] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  // const recognitionRef = useRef<SpeechRecognition | null>(null);
   const chatRef = useRef<HTMLDivElement>(null);
   const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    const SpeechRecognition = (window.SpeechRecognition ||
-      (window as any)
-        .webkitSpeechRecognition) as typeof window.SpeechRecognition;
+  // useEffect(() => {
+  //   const SpeechRecognition = (window.SpeechRecognition ||
+  //     (window as any)
+  //       .webkitSpeechRecognition) as typeof window.SpeechRecognition;
 
-    if (SpeechRecognition) {
-      const recognition = new SpeechRecognition();
-      recognition.continuous = false;
-      recognition.lang =
-        i18n.language === "ar"
-          ? "ar-SA"
-          : i18n.language === "fr"
-          ? "fr-FR"
-          : "en-US";
+  //   if (SpeechRecognition) {
+  //     const recognition = new SpeechRecognition();
+  //     recognition.continuous = false;
+  //     recognition.lang =
+  //       i18n.language === "ar"
+  //         ? "ar-SA"
+  //         : i18n.language === "fr"
+  //         ? "fr-FR"
+  //         : "en-US";
 
-      recognition.onresult = (event: SpeechRecognitionEvent) => {
-        setInput(event.results[0][0].transcript);
-      };
+  //     recognition.onresult = (event: SpeechRecognitionEvent) => {
+  //       setInput(event.results[0][0].transcript);
+  //     };
 
-      recognitionRef.current = recognition;
-    }
-  }, [i18n.language]);
+  //     // recognitionRef.current = recognition;
+  //   }
+  // }, [i18n.language]);
 
-  const startListening = () => recognitionRef.current?.start();
+  // const startListening = () => recognitionRef.current?.start();
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -98,7 +98,7 @@ const AiAssistant: React.FC = () => {
         {
           q: input,
           source: i18n.language,
-          target: translateTo,
+          // target: translateTo,
           format: "text",
         },
         {
@@ -227,7 +227,7 @@ const AiAssistant: React.FC = () => {
                 <AiOutlineSend /> {loading ? "Sending..." : "Send"}
               </button>
               <button
-                onClick={startListening}
+                // onClick={startListening}
                 className="flex items-center justify-center gap-1 bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition w-full sm:w-auto"
               >
                 <AiOutlineAudio /> Speak

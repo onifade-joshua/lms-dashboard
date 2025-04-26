@@ -48,7 +48,7 @@ function App() {
                     path="/"
                     element={
                       <Suspense fallback={<LoadingFallback />}>
-                        <Dashboard />
+                        <Dashboard userName="Joshua"/>
                       </Suspense>
                     }
                   />

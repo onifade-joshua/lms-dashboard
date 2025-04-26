@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
-// import { FaBook, FaCertificate, FaClock, FaCalendarAlt } from "react-icons/fa";
 import KPI from "../components/dashboard/KPI";
 import Calendar from "../components/dashboard/Calendar";
 import CourseStatus from "../components/dashboard/CourseStatus";
 import CourseProgress from "../components/dashboard/CourseProgress";
 import UserProgression from "../components/dashboard/UserProgression";
 import EnrolledCourses from "../components/dashboard/EnrolledCourses";
-import AiAssistant from "../components/dashboard/AiAssistant.tsx";
+import AiAssistant from "../components/dashboard/AiAssistant";
 
-// Assuming user details are available in props or context
 const Dashboard: React.FC<{ userName: string }> = ({ userName }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [isAiModalOpen, setIsAiModalOpen] = useState(false);
+  // const [isAiModalOpen, setIsAiModalOpen] = useState(false);
   const currentDate = format(new Date(), "EEEE, MMMM dd, yyyy");
-  const currentTime = format(new Date(), "HH:mm:ss a");
+  const currentTime = format(new Date(), "hh:mm:ss a");
 
-  // Get current hour to determine time of day
   const currentHour = new Date().getHours();
   let greeting = "Good Day";
 
@@ -33,7 +30,7 @@ const Dashboard: React.FC<{ userName: string }> = ({ userName }) => {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold">
-            {greeting}, Joshua{userName}!
+            {greeting}, {userName}!
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {currentDate} | {currentTime}
@@ -57,10 +54,10 @@ const Dashboard: React.FC<{ userName: string }> = ({ userName }) => {
       <EnrolledCourses />
 
       {/* User Progression Card */}
-      <UserProgression searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+      <UserProgression searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       {/* AI Assistant Button */}
-      <AiAssistant isAiModalOpen={isAiModalOpen} setIsAiModalOpen={setIsAiModalOpen} />
+      <AiAssistant  />
     </div>
   );
 };

@@ -9,7 +9,7 @@ const dummyTranslations: Record<string, Record<string, string>> = {
   },
 };
 
-export async function mockTranslate(input: string, from: string, to: string): Promise<string> {
+export async function mockTranslate( from: string, to: string): Promise<string> {
   await new Promise(resolve => setTimeout(resolve, 500)); // simulate latency
   return dummyTranslations[from]?.[to] || '[Translation not available]';
 }
