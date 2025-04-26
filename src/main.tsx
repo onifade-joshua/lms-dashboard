@@ -4,7 +4,18 @@ import './index.css'
 import App from './App.tsx'
 import { ThemeProvider } from './context/ThemeContext';
 import './i18n';
+import { registerSW } from 'virtual:pwa-register'
 
+
+registerSW({
+  onNeedRefresh() {
+  },
+  onOfflineReady() {
+  }
+})
+
+
+registerSW();
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>

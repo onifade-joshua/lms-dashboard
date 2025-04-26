@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
 // import { FaBook, FaCertificate, FaClock, FaCalendarAlt } from "react-icons/fa";
-import KPI from "../components/dashboard/Kpi";
+import KPI from "../components/dashboard/KPI";
 import Calendar from "../components/dashboard/Calendar";
 import CourseStatus from "../components/dashboard/CourseStatus";
 import CourseProgress from "../components/dashboard/CourseProgress";
@@ -53,11 +53,11 @@ const Dashboard: React.FC<{ userName: string }> = ({ userName }) => {
       {/* Course Progress Overview */}
       <CourseProgress />
 
-      {/* User Progression Card */}
-      <UserProgression searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-
       {/* Enrolled Courses List */}
       <EnrolledCourses />
+
+      {/* User Progression Card */}
+      <UserProgression searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
 
       {/* AI Assistant Button */}
       <AiAssistant isAiModalOpen={isAiModalOpen} setIsAiModalOpen={setIsAiModalOpen} />

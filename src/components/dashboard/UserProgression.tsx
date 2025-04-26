@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaFilter } from 'react-icons/fa'; // Importing filter icon from react-icons
+import { FaFilter } from 'react-icons/fa'; 
 
 const UserProgression: React.FC<{ searchQuery: string, setSearchQuery: React.Dispatch<React.SetStateAction<string>> }> = ({ searchQuery, setSearchQuery }) => {
   const initialUsers = [

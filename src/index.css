@@ -34,6 +34,9 @@
   --color-error: #ef4444; /* red-500 */
   --color-info: #3b82f6; /* blue-500 */
 }
+.icon-button {
+  @apply px-2 py-2 bg-blue-600 text-white rounded-lg transition hover:bg-blue-700 focus:outline-none;
+}
 
 /* Base styles */
 body {
